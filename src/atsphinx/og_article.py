@@ -1,4 +1,4 @@
-"""Support article tpye's properties of Open Graph."""
+"""Support article tpye's properties of Open Graph for Sphinx."""
 from sphinx.application import Sphinx
 
 __version__ = "0.0.0"

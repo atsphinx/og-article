@@ -2,11 +2,45 @@
 atsphinx-og-article
 ===================
 
-Support article tpye's properties of Open Graph.
+Support article tpye's properties of Open Graph for Sphinx.
+
+Overview
+========
+
+This is Sphinx extension to handle properties of article typeof Open Graph.
+
+You can add ``og-article`` directive with some options.
+
+.. code:: rst
+
+   .. og-article::
+      :published_time: 2023-05-07
+      :modified_time: 2023-05-07 12:00:00
+
+When it runs builder with this directive,
+your html file is generated included `<meta property="article:published_time">` and more properties.
 
 Getting started
 ===============
 
+Install from PyPI.
+
 .. code: console
 
    pip install atsphinx-og-article
+
+Configure your ``conf.py``.
+
+.. code: python
+
+   extensions = [
+       # After other extensions.
+       "atsphinx.og_article",
+   ]
+
+Append ``og-article`` directive into your document.
+
+Ref
+===
+
+- `Globally defined properties on OGP site. <https://ogp.me/#type_article>`_
