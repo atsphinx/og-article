@@ -50,6 +50,13 @@ from documents added directive.
    .. rst:directive:option:: modified_time
       :type: string
 
+   ``published_time`` and ``modified_time`` accept any format that dateutil can parse.
+   When it is parsing attribute, datetime object has timezone always.
+   If timezone is not set, set ``UTC`` forcely.
+
+   These are complement by mutually. If one is not set, use another value automately.
+   If neither not set, these are set build datetime.
+
 Configuration
 =============
 

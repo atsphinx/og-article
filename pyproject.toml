@@ -20,6 +20,7 @@ classifiers = [
 ]
 readme = "README.rst"
 dependencies = [
+  "python-dateutil",
   "sphinx",
 ]
 dynamic = ["version", "description"]
