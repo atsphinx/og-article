@@ -1,11 +1,11 @@
 # noqa: D100
-from atsphinx.og_article import __version__
+from atsphinx.og_article import __version__ as version
 
 # -- Project information
 project = "atsphinx-og-article"
 copyright = "2023, Kazuya Takei"
 author = "Kazuya Takei"
-release = __version__
+release = version
 
 # -- General configuration
 extensions = [
@@ -18,7 +18,9 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Options for HTML output
 html_theme = "furo"
+html_title = f"{project} v{version}"
 html_static_path = ["_static"]
+
 
 # -- Options for extensions
 # sphinx.ext.intersphinx
