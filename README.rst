@@ -2,6 +2,18 @@
 atsphinx-og-article
 ===================
 
+.. image:: https://img.shields.io/pypi/v/atsphinx-og-article.svg
+   :target: https://pypi.org/project/atsphinx-og-article/
+   :alt: Stable version on PyPI
+
+.. image:: https://github.com/atsphinx/og-article/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/atsphinx/og-article/actions
+   :alt: "Continuous Integration" status for main branch
+
+.. image:: https://readthedocs.org/projects/atsphinx-og-article/badge/?version=latest
+   :target: https://atsphinx-og-article.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation status
+
 Support article tpye's properties of Open Graph for Sphinx.
 
 Overview
