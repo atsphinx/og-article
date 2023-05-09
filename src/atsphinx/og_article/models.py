@@ -1,29 +1,18 @@
-"""Support article tpye's properties of Open Graph for Sphinx."""
+"""Object models in doctree domain."""
 
 from datetime import datetime
-from typing import Optional
-from xml.etree import ElementTree as ET
 
 from dateutil.parser import parse
 from dateutil.tz import gettz
 from docutils import nodes
-from sphinx import addnodes
-from sphinx.application import Sphinx
 from sphinx.config import Config
 from sphinx.util.docutils import SphinxDirective
-
-__version__ = "0.0.0"
 
 
 class og_article(nodes.General, nodes.Element):
     """Node class to manage article metadata."""
 
     pass
-
-
-def skip_node(self, node: og_article):
-    """Minimum function to skip when builder visit it."""
-    raise nodes.SkipNode()
 
 
 def complement_time_options(options: dict, config: Config) -> dict:
@@ -74,60 +63,3 @@ class OgArticleDirective(SphinxDirective):
         return [
             node,
         ]
-
-
-def add_metatags(
-    app: Sphinx,
-    pathname: str,
-    templatename: str,
-    context: dict,
-    doctree: Optional[addnodes.document] = None,
-):
-    """Pick og attributes from document and inject into metatags."""
-    if not doctree:
-        return
-    targets = list(doctree.findall(og_article))
-    if not targets:
-        return
-    if "metatags" not in context:
-        context["metatags"] = ""
-    node: og_article = targets[0]
-    # Append time properties
-    metatags = [
-        ET.Element(
-            "meta",
-            {
-                "property": "article:published_time",
-                "content": node["published_time"].isoformat(timespec="seconds"),
-            },
-        ),
-        ET.Element(
-            "meta",
-            {
-                "property": "article:modified_time",
-                "content": node["modified_time"].isoformat(timespec="seconds"),
-            },
-        ),
-    ]
-    metatags = b"\n".join([ET.tostring(e) for e in metatags])
-    context["metatags"] += f"\n{metatags}"
-
-
-def setup(app: Sphinx):  # noqa: D103
-    app.add_config_value("og_article_timezone", None, "env", [str])
-    app.add_directive("og-article", OgArticleDirective)
-    app.add_node(
-        og_article,
-        html=(skip_node, None),
-        latex=(skip_node, None),
-        text=(skip_node, None),
-        man=(skip_node, None),
-        texinfo=(skip_node, None),
-    )
-    app.connect("html-page-context", add_metatags)
-    return {
-        "version": __version__,
-        "env_version": 1,
-        "parallel_read_safe": True,
-        "parallel_write_safe": True,
-    }

@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from dateutil.tz import gettz
 from sphinx.testing.util import SphinxTestApp
 
-from atsphinx import og_article
+from atsphinx.og_article import models
 
 
 @pytest.mark.sphinx("html")
@@ -16,7 +16,7 @@ def test__it(app: SphinxTestApp, status: StringIO, warning: StringIO):
     app.builder.read()
     doctree = app.env.get_doctree("index")
     assert doctree is not None
-    target_nodes = list(doctree.findall(og_article.og_article))
+    target_nodes = list(doctree.findall(models.og_article))
     assert len(target_nodes) == 1
 
 
@@ -47,7 +47,7 @@ def test__time_values(
     """Test case for time complements."""
     app.build()
     doctree = app.env.get_doctree(f"cases-for-times/{case}")
-    target = list(doctree.findall(og_article.og_article))[0]
+    target = list(doctree.findall(models.og_article))[0]
     assert (target["published_time"].tzinfo is not None) is published_has_tzinfo
     assert (target["modified_time"].tzinfo is not None) is modified_has_tzinfo
     if is_same:
@@ -82,7 +82,7 @@ def test__time_values_with_conf(
     """Test case for time complements with ``og_article_timezone``."""
     app.build()
     doctree = app.env.get_doctree(f"cases-for-times/{case}")
-    target = list(doctree.findall(og_article.og_article))[0]
+    target = list(doctree.findall(models.og_article))[0]
     assert target["published_time"].tzinfo is not None
     assert target["modified_time"].tzinfo is not None
     if "tzinfo" not in case:
