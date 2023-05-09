@@ -2,6 +2,16 @@
 Change logs
 ===========
 
+v0.1.1
+======
+
+:date: 2023-05-10 (JST)
+
+Miscellaneous
+-------------
+
+* Update project metadata.
+
 v0.1.0
 ======
 
