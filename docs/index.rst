@@ -19,8 +19,6 @@ For full functional as OpenGraph, install :pypi:`sphinxext-opengraph` too.
 Installation
 ============
 
-.. todo:: This is scheduled method.
-
 This is registered on PyPI.
 You can install ``pip`` command.
 
