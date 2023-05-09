@@ -26,3 +26,12 @@ intersphinx_mapping = {
 }
 # sphinx.ext.todo
 todo_include_todos = True
+
+
+def setup(app):  # noqa: D103
+    app.add_object_type(
+        "confval",
+        "confval",
+        objname="configuration value",
+        indextemplate="pair: %s; configuration value",
+    )

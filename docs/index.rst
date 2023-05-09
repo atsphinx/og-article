@@ -52,7 +52,6 @@ from documents added directive.
 
    ``published_time`` and ``modified_time`` accept any format that dateutil can parse.
    When it is parsing attribute, datetime object has timezone always.
-   If timezone is not set, set ``UTC`` forcely.
 
    These are complement by mutually. If one is not set, use another value automately.
    If neither not set, these are set build datetime.
@@ -60,4 +59,9 @@ from documents added directive.
 Configuration
 =============
 
-.. todo:: I plan to declare configurations.
+.. confval:: og_article_timezone
+   :Type: ``str | None``
+   :Default: ``None``
+   :Example: ``Asia/Tokyo``
+
+   If this is not ``None``, replace timezone of ``published_time`` and ``modified_time`` that do not have timezone text.
