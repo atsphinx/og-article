@@ -1,7 +1,9 @@
 """Standard tests."""
 from io import StringIO
+from pathlib import Path
 
 import pytest
+from bs4 import BeautifulSoup
 from dateutil.tz import gettz
 from sphinx.testing.util import SphinxTestApp
 
@@ -52,6 +54,11 @@ def test__time_values(
         assert target["published_time"] == target["modified_time"]
     else:
         assert target["published_time"] != target["modified_time"]
+    soup = BeautifulSoup(
+        Path(f"{app.outdir}/cases-for-times/{case}.html").read_text(), "html.parser"
+    )
+    assert soup.find("meta", {"property": "article:published_time"})
+    assert soup.find("meta", {"property": "article:modified_time"})
 
 
 @pytest.mark.sphinx(confoverrides={"og_article_timezone": "UTC"})

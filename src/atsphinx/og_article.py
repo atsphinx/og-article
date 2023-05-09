@@ -1,10 +1,13 @@
 """Support article tpye's properties of Open Graph for Sphinx."""
 
 from datetime import datetime
+from typing import Optional
+from xml.etree import ElementTree as ET
 
 from dateutil.parser import parse
 from dateutil.tz import gettz
 from docutils import nodes
+from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.config import Config
 from sphinx.util.docutils import SphinxDirective
@@ -73,6 +76,43 @@ class OgArticleDirective(SphinxDirective):
         ]
 
 
+def add_metatags(
+    app: Sphinx,
+    pathname: str,
+    templatename: str,
+    context: dict,
+    doctree: Optional[addnodes.document] = None,
+):
+    """Pick og attributes from document and inject into metatags."""
+    if not doctree:
+        return
+    targets = list(doctree.findall(og_article))
+    if not targets:
+        return
+    if "metatags" not in context:
+        context["metatags"] = ""
+    node: og_article = targets[0]
+    # Append time properties
+    metatags = [
+        ET.Element(
+            "meta",
+            {
+                "property": "article:published_time",
+                "content": node["published_time"].isoformat(timespec="seconds"),
+            },
+        ),
+        ET.Element(
+            "meta",
+            {
+                "property": "article:modified_time",
+                "content": node["modified_time"].isoformat(timespec="seconds"),
+            },
+        ),
+    ]
+    metatags = b"\n".join([ET.tostring(e) for e in metatags])
+    context["metatags"] += f"\n{metatags}"
+
+
 def setup(app: Sphinx):  # noqa: D103
     app.add_config_value("og_article_timezone", None, "env", [str])
     app.add_directive("og-article", OgArticleDirective)
@@ -84,6 +124,7 @@ def setup(app: Sphinx):  # noqa: D103
         man=(skip_node, None),
         texinfo=(skip_node, None),
     )
+    app.connect("html-page-context", add_metatags)
     return {
         "version": __version__,
         "env_version": 1,
