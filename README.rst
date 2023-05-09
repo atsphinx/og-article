@@ -40,7 +40,15 @@ Configure your ``conf.py``.
 
 Append ``og-article`` directive into your document.
 
+Important note
+==============
+
+This extension renders only ``article:*`` properties, and does not render ``og:*`` properties.
+
+I recommend to install ``sphinxext-opengraph`` too.
+
 Ref
 ===
 
 - `Globally defined properties on OGP site. <https://ogp.me/#type_article>`_
+- `sphinxext-opengraph <https://pypi.org/project/sphinxext-opengraph/>`_

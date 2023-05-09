@@ -5,7 +5,16 @@ atsphinx-og-article
 Overview
 ========
 
-.. todo:: Write it
+This is Sphinx extension to handle properties of article typeof Open Graph.
+
+You can add ``og-article`` directive with some options.
+This appends extra properties into meta tags from ``og-article`` directive.
+
+NOTE: Use with sphinxext-opengraph
+----------------------------------
+
+This renders only ``article:**`` meta tags.
+For full functional as OpenGraph, install :pypi:`sphinxext-opengraph` too.
 
 Installation
 ============
@@ -60,6 +69,7 @@ Configuration
 =============
 
 .. confval:: og_article_timezone
+
    :Type: ``str | None``
    :Default: ``None``
    :Example: ``Asia/Tokyo``
