@@ -7,7 +7,7 @@ name = "atsphinx-og-article"
 authors = [{name = "Kazuya Takei", email = "myself@attakei.net"}]
 license = {file = "LICENSE"}
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Framework :: Sphinx",
   "Framework :: Sphinx :: Extension",
   "Intended Audience :: Developers",
@@ -37,7 +37,8 @@ doc = [
 ]
 
 [project.urls]
-Home = "https://github.com/atsphinx/og-article"
+Documentation = "https://atsphinx-og-article.readthedocs.io/en/stable/"
+Source = "https://github.com/atsphinx/og-article"
 
 [tool.flit.module]
 name = "atsphinx.og_article"
