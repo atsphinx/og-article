@@ -42,5 +42,16 @@ def add_metatags(
             },
         ),
     ]
+    # Append tag properties
+    metatags += [
+        ET.Element(
+            "meta",
+            {
+                "property": "article:tag",
+                "content": tag,
+            },
+        )
+        for tag in node["tags"]
+    ]
     metatags = b"\n".join([ET.tostring(e) for e in metatags])
     context["metatags"] += f"\n{metatags}"

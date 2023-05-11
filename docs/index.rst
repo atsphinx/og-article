@@ -63,6 +63,12 @@ from documents added directive.
    These are complement by mutually. If one is not set, use another value automately.
    If neither not set, these are set build datetime.
 
+   .. rst:directive:option:: tags
+      :type: string
+
+      Comma separated list for tags of article.
+      When this is set, extension generates ``article:tag`` properties per values separated comma.
+
 Configuration
 =============
 

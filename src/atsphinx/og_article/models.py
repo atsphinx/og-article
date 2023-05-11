@@ -1,6 +1,8 @@
 """Object models in doctree domain."""
 
+import re
 from datetime import datetime
+from typing import Callable, List, Optional
 
 from dateutil.parser import parse
 from dateutil.tz import gettz
@@ -13,6 +15,21 @@ class og_article(nodes.General, nodes.Element):
     """Node class to manage article metadata."""
 
     pass
+
+
+def parser_multiple_values(delimiter: str) -> Callable[[Optional[str]], List[str]]:
+    """Convert from tag collection string to tags.
+
+    :params delimiter: Character as delimiter of tags.
+    :returns: Function as option_spec of directive.
+    """
+
+    def _parser_multiple_values(value: Optional[str] = None) -> List[str]:
+        if value is None:
+            return []
+        return re.split(rf"{delimiter}\s+", value)
+
+    return _parser_multiple_values
 
 
 def complement_time_options(options: dict, config: Config) -> dict:
@@ -55,10 +72,13 @@ class OgArticleDirective(SphinxDirective):
     option_spec = {
         "published_time": parse,
         "modified_time": parse,
+        "tags": parser_multiple_values(","),
     }
 
     def run(self):  # noqa: D102
         node = og_article()
+        if "tags" not in self.options:
+            self.options["tags"] = []
         node.attributes = complement_time_options(self.options, self.env.config)
         return [
             node,
