@@ -53,5 +53,5 @@ def add_metatags(
         )
         for tag in node["tags"]
     ]
-    metatags = b"\n".join([ET.tostring(e) for e in metatags])
+    metatags = b"\n".join([ET.tostring(e) for e in metatags]).decode()
     context["metatags"] += f"\n{metatags}"
