@@ -5,7 +5,7 @@ from sphinx.application import Sphinx
 
 from . import models, processors
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 
 def skip_node(self, node: models.og_article):

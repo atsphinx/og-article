@@ -2,6 +2,16 @@
 Change logs
 ===========
 
+v0.2.1
+======
+
+:date: 2023-05-13 (JST)
+
+Fixes
+-----
+
+* Render str type content into html (fix from bytes content)
+
 v0.2.0
 ======
 
