@@ -2,6 +2,16 @@
 Change logs
 ===========
 
+v0.2.0
+======
+
+:date: 2023-05-12 (JST)
+
+Features
+--------
+
+* Add option ``tags`` into ``og-article`` to support ``article:tag`` properties.
+
 v0.1.1
 ======
 
